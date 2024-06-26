@@ -1,9 +1,27 @@
-import PropTypes from 'prop-types';
+// ReposGrid.tsx
+import React from 'react';
 import Card from './Card';
 import Tooltip from './Tooltip';
-import React from 'react';
 
-export default function ReposGrid({ repos }) {
+interface Owner {
+  login: string;
+  avatar_url: string;
+}
+
+interface Repo {
+  name: string;
+  owner: Owner;
+  html_url: string;
+  stargazers_count: number;
+  forks: number;
+  open_issues: number;
+}
+
+interface ReposGridProps {
+  repos: Repo[];
+}
+
+const ReposGrid: React.FC<ReposGridProps> = ({ repos }) => {
   return (
     <ul className="grid space-around">
       {repos.map((repo, index) => {
@@ -12,13 +30,7 @@ export default function ReposGrid({ repos }) {
 
         return (
           <li key={html_url + ('' + index)}>
-            <Card
-              header={`#${index + 1}`}
-              avatar={avatar_url}
-              href={html_url}
-              username={login}
-              name={name}
-            >
+            <Card header={`#${index + 1}`} avatar={avatar_url} href={html_url} name={name}>
               <ul className="card-list">
                 <li>
                   <Tooltip text={name}>
@@ -57,10 +69,6 @@ export default function ReposGrid({ repos }) {
       })}
     </ul>
   );
-}
-
-ReposGrid.propTypes = {
-  repos: PropTypes.array.isRequired,
 };
 
-window.ReposGrid = ReposGrid;
+export default ReposGrid;

@@ -8,7 +8,7 @@ export default function Battle() {
   const [playerTwo, setPlayerTwo] = React.useState(null);
 
   return (
-    <React.Fragment>
+    <>
       <Instructions />
 
       <div className="players-container">
@@ -44,6 +44,6 @@ export default function Battle() {
           </Link>
         )}
       </div>
-    </React.Fragment>
+    </>
   );
 }

@@ -1,17 +1,26 @@
+// Card.tsx
 import React from 'react';
-
-import PropTypes from 'prop-types';
-import LazyImage from '@/components/LazyImage';
+import LazyImage from '@components/LazyImage';
+// @ts-ignore
 import placeholder from '@/imgs/placeholder.png';
 
-export default function Card({ header, avatar, href, name, username, children }) {
+interface CardProps {
+  header: string;
+  subheader?: string;
+  avatar: string;
+  href: string;
+  name: string;
+  children?: React.ReactNode; // 定义 children 属性的类型为 React.ReactNode
+}
+
+const Card: React.FC<CardProps> = ({ header, avatar, href, name, children }) => {
   return (
     <div className="card bg-light">
       <h4 className="header-lg center-text">{header}</h4>
       <LazyImage
         className="avatar"
         src={avatar}
-        alt={`Avatar for ${username}`}
+        alt={`Avatar for ${name}`}
         placeholder={placeholder}
       />
       <h2 className="center-text">
@@ -22,12 +31,6 @@ export default function Card({ header, avatar, href, name, username, children })
       <ul className="card-list">{children}</ul>
     </div>
   );
-}
-
-Card.propTypes = {
-  header: PropTypes.string.isRequired,
-  subheader: PropTypes.string,
-  avatar: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
 };
+
+export default Card;

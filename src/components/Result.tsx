@@ -1,62 +1,36 @@
-import React from 'react';
-import { battle } from '@/utils/index.js';
+import React, { useState, useEffect } from 'react';
+import { battle } from '@/utils';
 import Card from './Card';
 import ProfileList from './ProfileList';
 import Loading from './Loading';
 import { Link, useSearchParams } from 'react-router-dom';
 
-function battleReducer(state, action) {
-  if (action.type === 'fetch') {
-    return {
-      ...state,
-      loading: true,
-    };
-  } else if (action.type === 'success') {
-    return {
-      winner: action.winner,
-      loser: action.loser,
-      error: null,
-      loading: false,
-    };
-  } else if (action.type === 'error') {
-    return {
-      ...state,
-      error: 'Error fetching data. Try again',
-      loading: false,
-    };
-  } else {
-    throw new Error("That action type isn't supported.");
-  }
-}
-
-function useFetch(playerOne, playerTwo) {
-  const [state, dispatch] = React.useReducer(battleReducer, {
-    winner: null,
-    loser: null,
-    error: null,
-    loading: true,
-  });
-
-  React.useEffect(() => {
-    dispatch({ type: 'fetch' });
-
-    battle([playerOne, playerTwo])
-      .then((players) => dispatch({ type: 'success', winner: players[0], loser: players[1] }))
-      .catch((error) => {
-        console.warn('Error fetching results:', error);
-        dispatch({ type: 'error' });
-      });
-  }, [playerOne, playerTwo]);
-
-  return state;
-}
-
-export default function Results({ location }) {
-  console.log('location', location);
+export default function Results() {
   const [searchParams] = useSearchParams();
   const playerOne = searchParams.get('playerOne');
   const playerTwo = searchParams.get('playerTwo');
-  const { winner, loser, error, loading } = useFetch(playerOne, playerTwo);
+
+  const [winner, setWinner] = useState(null);
+  const [loser, setLoser] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+
+    battle([playerOne, playerTwo])
+      .then((players) => {
+        setWinner(players[0]);
+        setLoser(players[1]);
+        setError(null);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.warn('Error fetching results:', error);
+        setError('Error fetching data. Try again');
+        setLoading(false);
+      });
+  }, [playerOne, playerTwo]);
 
   if (loading === true) {
     return <Loading text="Battling" />;

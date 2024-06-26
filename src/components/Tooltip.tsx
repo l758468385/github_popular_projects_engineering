@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import useHover from '../hooks/useHover';
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   container: {
     position: 'relative',
     display: 'flex',
@@ -24,7 +23,12 @@ const styles = {
   },
 };
 
-export default function Tooltip({ text, children }) {
+interface TooltipProps {
+  text: string;
+  children: ReactNode;
+}
+
+const Tooltip: React.FC<TooltipProps> = ({ text, children }) => {
   const [hovering, attrs] = useHover();
   return (
     <div style={styles.container} {...attrs}>
@@ -32,8 +36,6 @@ export default function Tooltip({ text, children }) {
       {children}
     </div>
   );
-}
-
-Tooltip.propTypes = {
-  text: PropTypes.string.isRequired,
 };
+
+export default Tooltip;
