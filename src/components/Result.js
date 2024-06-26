@@ -25,7 +25,7 @@ function battleReducer(state, action) {
       loading: false,
     };
   } else {
-    throw new Error(`That action type isn't supported.`);
+    throw new Error("That action type isn't supported.");
   }
 }
 

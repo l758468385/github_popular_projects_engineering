@@ -7,7 +7,7 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "lint": "npm run lint-eslint",
-    "lint-eslint": "eslint -c .eslintrc.json --ext .ts,.tsx,.js src",
+    "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js src",
     "prepare": "husky install",
     "commit": "git-cz"
   },
@@ -24,7 +24,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
-      "eslint --config .eslintrc.json"
+      "eslint --config .eslintrc.js"
     ]
   },
   "keywords": [],

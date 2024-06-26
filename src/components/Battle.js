@@ -3,7 +3,6 @@ import Instructions from './Instructions';
 import PlayerInput from './PlayerInput';
 import PlayerPreview from './PlayerPreview';
 import { Link } from 'react-router-dom';
-
 export default function Battle() {
   const [playerOne, setPlayerOne] = React.useState(null);
   const [playerTwo, setPlayerTwo] = React.useState(null);
