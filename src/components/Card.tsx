@@ -1,7 +1,5 @@
-// Card.tsx
 import React from 'react';
 import LazyImage from '@components/LazyImage';
-// @ts-ignore
 import placeholder from '@/imgs/placeholder.png';
 
 interface CardProps {

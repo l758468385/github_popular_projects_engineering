@@ -2,20 +2,7 @@
 import React from 'react';
 import Card from './Card';
 import Tooltip from './Tooltip';
-
-interface Owner {
-  login: string;
-  avatar_url: string;
-}
-
-interface Repo {
-  name: string;
-  owner: Owner;
-  html_url: string;
-  stargazers_count: number;
-  forks: number;
-  open_issues: number;
-}
+import { Repo } from '@/types/types';
 
 interface ReposGridProps {
   repos: Repo[];

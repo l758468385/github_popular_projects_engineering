@@ -2,11 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 import LanguagesNav from './LanguagesNav';
 import Loading from './Loading';
-import { fetchPopularRepos } from '@/utils';
 import ReposGrid from './ReposGrid';
 
+import { fetchPopularRepos } from '@/utils';
+import { Repo } from '@/types/types';
+
 function useFetch(selectedLanguage: string) {
-  const [repos, setRepos] = useState([]);
+  const [repos, setRepos] = useState<Repo[]>([]);
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
@@ -26,7 +28,7 @@ function useFetch(selectedLanguage: string) {
 
     setLoading(true);
     fetchPopularRepos(selectedLanguage, 1)
-      .then((data: []) => {
+      .then((data: Repo[]) => {
         setRepos(data);
         setPage(1);
         setLoading(false);
@@ -37,22 +39,22 @@ function useFetch(selectedLanguage: string) {
         setError('Error fetching data. Try again');
         setLoading(false);
       });
-  }, [selectedLanguage]);
+  }, [selectedLanguage, repos]);
 
   const loadMore = () => {
     setLoadingMore(true);
     const nextPage = page + 1;
 
     fetchPopularRepos(selectedLanguage, nextPage)
-      .then((data: []) => {
+      .then((data: Repo[]) => {
         setRepos((prevRepos) => [...prevRepos, ...data]);
         setPage(nextPage);
         setLoadingMore(false);
         setError(null);
       })
       .catch(() => {
-        window.scrollBy(0, -50);
         setError('Error fetching data. Try again');
+        window.scrollBy(0, -50);
         setTimeout(() => {
           setLoadingMore(false);
         });
