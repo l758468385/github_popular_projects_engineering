@@ -1,0 +1,17 @@
+# 使用官方的 node 镜像作为构建环境
+FROM node:18 AS build
+
+# 设置工作目录
+WORKDIR /usr/src/app
+
+# 复制 package.json 和 package-lock.json
+COPY package*.json ./
+
+# 安装依赖
+RUN npm install
+
+# 复制所有源代码到工作目录
+COPY . .
+
+# 构建项目
+RUN npm run build
