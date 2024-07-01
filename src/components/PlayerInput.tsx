@@ -1,16 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-const theme = 'light';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-export default function PlayerInput({ label, onSubmit }) {
-  const [username, setUsername] = React.useState('');
+interface PlayerInputProps {
+  label: string;
+  onSubmit: (username: string) => void;
+}
 
-  const handleSubmit = (event) => {
+const PlayerInput: React.FC<PlayerInputProps> = ({ label, onSubmit }) => {
+  const [username, setUsername] = useState<string>('');
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit(username);
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
   };
 
@@ -22,25 +25,18 @@ export default function PlayerInput({ label, onSubmit }) {
       <div className="row player-inputs">
         <input
           type="text"
-          className={`input-${theme}`}
+          className="input-light"
           placeholder="github username"
           autoComplete="off"
           value={username}
           onChange={handleChange}
         />
-        <button
-          className={`btn ${theme === 'light' ? 'dark-btn' : 'light-btn'}`}
-          type="submit"
-          disabled={!username}
-        >
+        <button className="dark-btn" type="submit" disabled={!username}>
           Submit
         </button>
       </div>
     </form>
   );
-}
-
-PlayerInput.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
 };
+
+export default PlayerInput;

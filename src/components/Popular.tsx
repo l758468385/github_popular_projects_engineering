@@ -42,7 +42,6 @@ function useFetch(selectedLanguage: string) {
   }, [selectedLanguage, repos]);
 
   const loadMore = () => {
-    setLoadingMore(true);
     const nextPage = page + 1;
 
     fetchPopularRepos(selectedLanguage, nextPage)
@@ -55,9 +54,7 @@ function useFetch(selectedLanguage: string) {
       .catch(() => {
         setError('Error fetching data. Try again');
         window.scrollBy(0, -50);
-        setTimeout(() => {
-          setLoadingMore(false);
-        });
+        setLoadingMore(false);
       });
   };
 
@@ -66,6 +63,7 @@ function useFetch(selectedLanguage: string) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !loadingMore) {
+          setLoadingMore(true);
           loadMore();
         }
       },

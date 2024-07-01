@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaTimesCircle } from 'react-icons/fa';
-const theme = 'light';
 
 export default function PlayerPreview({ username, onReset, label }) {
   return (
     <div className="column player">
       <h3 className="player-label">{label}</h3>
-      <div className={`row bg-${theme}`}>
+      <div className={`row bg-light`}>
         <div className="player-info">
           <img
             className="avatar-small"
