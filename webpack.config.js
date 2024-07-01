@@ -1,15 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const TerserPlugin = require('terser-webpack-plugin');
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {

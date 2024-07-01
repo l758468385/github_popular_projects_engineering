@@ -34,4 +34,13 @@ module.exports = {
     'react/forbid-prop-types': 0,
     'react/jsx-indent': 0,
   },
+  overrides: [
+    {
+      files: ['webpack.config.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        'import/no-commonjs': 'off',
+      },
+    },
+  ],
 };
