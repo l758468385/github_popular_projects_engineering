@@ -33,6 +33,7 @@ module.exports = {
     'react/prop-types': 0,
     'react/forbid-prop-types': 0,
     'react/jsx-indent': 0,
+    console: 0,
   },
   overrides: [
     {
