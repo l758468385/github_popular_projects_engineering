@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 const Popular = lazy(() => import('@/components/Popular'));
 const Battle = lazy(() => import('@components/Battle'));
 const Results = lazy(() => import('@components/Result'));
-
+// 本次特性新增功能 1  2 3
 export default function App() {
   return (
     <BrowserRouter>
