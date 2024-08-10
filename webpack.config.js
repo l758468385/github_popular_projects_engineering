@@ -6,7 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-
+// 多特性啦
 module.exports = {
   entry: './src/index.tsx',
   output: {
