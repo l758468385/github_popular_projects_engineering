@@ -12,12 +12,7 @@
     "commit": "git-cz",
     "update-version": "node scripts/update-version.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint --config .commitlintrc.js -E HUSKY_GIT_PARAMS"
-    }
-  },
+  "husky": {},
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
